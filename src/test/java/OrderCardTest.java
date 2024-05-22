@@ -107,5 +107,14 @@ public class OrderCardTest {
         form.$(".button__text").click();
         $("[data-test-id=agreement].input_invalid .checkbox__text").shouldBe(visible);
     }
-
+    @Test
+    void shouldTest2NoNumber() {
+        open("http://localhost:9999");
+        SelenideElement form = $(".form");
+        form.$("[data-test-id=name] input").setValue("Бондарев Сергей");
+        form.$("[data-test-id=phone] input").setValue("");
+        form.$("[data-test-id=agreement]").click();
+        form.$(".button__text").click();
+        $("[data-test-id='phone'].input_invalid .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
 }
